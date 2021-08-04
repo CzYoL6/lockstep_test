@@ -1,0 +1,31 @@
+syntax = "proto3";
+package Chat;
+
+enum TYPE{
+    chatMessage_C_TO_S = 0;
+    chatMessage_S_TO_C = 1;
+    setNickName_C_TO_S = 2;
+    nickNameBeenSet_S_TO_C = 3;
+    welcome_S_TO_C = 4;
+}
+
+message ChatMessage_C_TO_S{
+    string msg = 1;
+}
+
+message ChatMessage_S_TO_C{
+    string nickname = 1;
+    string time = 2;
+    string msg = 3;
+}
+
+message SetNickName_C_TO_S{
+    string nickname = 1;
+}
+
+message NickName_Been_Set_S_TO_C{
+}
+
+message Welcome_S_TO_C{
+
+}
