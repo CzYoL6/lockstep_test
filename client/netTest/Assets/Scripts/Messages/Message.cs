@@ -28,13 +28,14 @@ namespace Chat {
             "CgFXGAEgASgIEgkKAVMYAiABKAgSCQoBQRgDIAEoCBIJCgFEGAQgASgIEg8K",
             "B2ZyYW1lSUQYBSABKAUiSwoLQ29udHJvbEluZm8SCQoBVxgBIAEoCBIJCgFT",
             "GAIgASgIEgkKAUEYAyABKAgSCQoBRBgEIAEoCBIQCghwbGF5ZXJJRBgFIAEo",
-            "BSJUChFVcGRhdGVJbmZvX1NfVE9fQxIPCgdmcmFtZUlEGAEgASgFEi4KDGNv",
-            "bnRyb2xJbmZvcxgCIAMoCzIYLkNoYXQuQ29udHJvbEluZm9fQ19UT19TIiYK",
-            "ElNldE5pY2tOYW1lX0NfVE9fUxIQCghuaWNrbmFtZRgBIAEoCSIaChhOaWNr",
-            "TmFtZV9CZWVuX1NldF9TX1RPX0MiEAoOV2VsY29tZV9TX1RPX0MqfQoEVFlQ",
-            "RRIWChJjb250cm9sSW5mb19DX1RPX1MQABIVChF1cGRhdGVJbmZvX1NfVE9f",
-            "QxABEhYKEnNldE5pY2tOYW1lX0NfVE9fUxACEhoKFm5pY2tOYW1lQmVlblNl",
-            "dF9TX1RPX0MQAxISCg53ZWxjb21lX1NfVE9fQxAEYgZwcm90bzM="));
+            "BSJNChFVcGRhdGVJbmZvX1NfVE9fQxIPCgdmcmFtZUlEGAEgASgFEicKDGNv",
+            "bnRyb2xJbmZvcxgCIAMoCzIRLkNoYXQuQ29udHJvbEluZm8iJgoSU2V0Tmlj",
+            "a05hbWVfQ19UT19TEhAKCG5pY2tuYW1lGAEgASgJIhoKGE5pY2tOYW1lX0Jl",
+            "ZW5fU2V0X1NfVE9fQyIiCg5XZWxjb21lX1NfVE9fQxIQCghwbGF5ZXJJRBgB",
+            "IAEoBSp9CgRUWVBFEhYKEmNvbnRyb2xJbmZvX0NfVE9fUxAAEhUKEXVwZGF0",
+            "ZUluZm9fU19UT19DEAESFgoSc2V0Tmlja05hbWVfQ19UT19TEAISGgoWbmlj",
+            "a05hbWVCZWVuU2V0X1NfVE9fQxADEhIKDndlbGNvbWVfU19UT19DEARiBnBy",
+            "b3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Chat.TYPE), }, new pbr::GeneratedClrTypeInfo[] {
@@ -43,7 +44,7 @@ namespace Chat {
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.UpdateInfo_S_TO_C), global::Chat.UpdateInfo_S_TO_C.Parser, new[]{ "FrameID", "ControlInfos" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.SetNickName_C_TO_S), global::Chat.SetNickName_C_TO_S.Parser, new[]{ "Nickname" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.NickName_Been_Set_S_TO_C), global::Chat.NickName_Been_Set_S_TO_C.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Welcome_S_TO_C), global::Chat.Welcome_S_TO_C.Parser, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Welcome_S_TO_C), global::Chat.Welcome_S_TO_C.Parser, new[]{ "PlayerID" }, null, null, null)
           }));
     }
     #endregion
@@ -591,11 +592,11 @@ namespace Chat {
 
     /// <summary>Field number for the "controlInfos" field.</summary>
     public const int ControlInfosFieldNumber = 2;
-    private static readonly pb::FieldCodec<global::Chat.ControlInfo_C_TO_S> _repeated_controlInfos_codec
-        = pb::FieldCodec.ForMessage(18, global::Chat.ControlInfo_C_TO_S.Parser);
-    private readonly pbc::RepeatedField<global::Chat.ControlInfo_C_TO_S> controlInfos_ = new pbc::RepeatedField<global::Chat.ControlInfo_C_TO_S>();
+    private static readonly pb::FieldCodec<global::Chat.ControlInfo> _repeated_controlInfos_codec
+        = pb::FieldCodec.ForMessage(18, global::Chat.ControlInfo.Parser);
+    private readonly pbc::RepeatedField<global::Chat.ControlInfo> controlInfos_ = new pbc::RepeatedField<global::Chat.ControlInfo>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Chat.ControlInfo_C_TO_S> ControlInfos {
+    public pbc::RepeatedField<global::Chat.ControlInfo> ControlInfos {
       get { return controlInfos_; }
     }
 
@@ -947,12 +948,24 @@ namespace Chat {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Welcome_S_TO_C(Welcome_S_TO_C other) : this() {
+      playerID_ = other.playerID_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Welcome_S_TO_C Clone() {
       return new Welcome_S_TO_C(this);
+    }
+
+    /// <summary>Field number for the "playerID" field.</summary>
+    public const int PlayerIDFieldNumber = 1;
+    private int playerID_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int PlayerID {
+      get { return playerID_; }
+      set {
+        playerID_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -968,12 +981,14 @@ namespace Chat {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (PlayerID != other.PlayerID) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (PlayerID != 0) hash ^= PlayerID.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -987,6 +1002,10 @@ namespace Chat {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+      if (PlayerID != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(PlayerID);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -995,6 +1014,9 @@ namespace Chat {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (PlayerID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(PlayerID);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1005,6 +1027,9 @@ namespace Chat {
     public void MergeFrom(Welcome_S_TO_C other) {
       if (other == null) {
         return;
+      }
+      if (other.PlayerID != 0) {
+        PlayerID = other.PlayerID;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1017,6 +1042,10 @@ namespace Chat {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+          case 8: {
+            PlayerID = input.ReadInt32();
+            break;
+          }
         }
       }
     }

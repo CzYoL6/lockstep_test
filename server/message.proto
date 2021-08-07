@@ -27,7 +27,7 @@ message ControlInfo{
 
 message UpdateInfo_S_TO_C{
     int32 frameID = 1;
-    repeated ControlInfo_C_TO_S controlInfos = 2;
+    repeated ControlInfo controlInfos = 2;
 }
 
 message SetNickName_C_TO_S{
@@ -38,4 +38,5 @@ message NickName_Been_Set_S_TO_C{
 }
 
 message Welcome_S_TO_C{
+    int32 playerID = 1;
 }

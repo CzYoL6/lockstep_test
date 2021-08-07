@@ -190,51 +190,6 @@ void Server::HandleData() {
                 Chat::TYPE type = *(reinterpret_cast<Chat::TYPE*>(tmp));
 
                 switch (type) {
-                    case Chat::TYPE::chatMessage_C_TO_S: {
-                        memset(tmp, 0, sizeof(tmp));
-                        cli->GetRecvBuffer()->Read(
-                            tmp, p_tmp_res - sizeof(Chat::TYPE));
-                        Chat::ChatMessage_C_TO_S newMsg;
-                        if (!newMsg.ParseFromArray(
-                                tmp, p_tmp_res - sizeof(Chat::TYPE)))
-                            break;
-                        std::cout << "msg: " << newMsg.msg() << std::endl;
-
-                        //获取当前时间
-                        //当前的时间点
-                        std::chrono::system_clock::time_point tp =
-                            std::chrono::system_clock::now();
-                        //转换为time_t类型
-                        std::time_t t =
-                            std::chrono::system_clock::to_time_t(tp);
-                        //转换为字符串
-                        std::string now = ctime(&t);
-                        //去除末尾的换行
-                        now.resize(now.size() - 1);
-
-                        Packet* packet =
-                            new Packet(Chat::TYPE::chatMessage_S_TO_C);
-
-                        Chat::ChatMessage_S_TO_C protoMsg;
-                        protoMsg.set_msg(newMsg.msg());
-                        protoMsg.set_time(now);
-                        protoMsg.set_nickname(cli->GetNickname());
-                        char tmp[1024];
-                        memset(tmp, 0, sizeof(tmp));
-                        protoMsg.SerializeToArray(tmp, protoMsg.ByteSizeLong());
-                        packet->AddVal(tmp, protoMsg.ByteSizeLong());
-                        packet->InsertLengthInFront();
-
-                        for (auto iter : *clients) {
-                            if (iter.first != cli->GetSockFd())
-                                send(iter.first,
-                                     packet->GetCircleBuffer()->GetBuffer(),
-                                     packet->GetAllLength(), 0);
-                        }
-
-                        delete packet;
-                        break;
-                    }
                     case Chat::TYPE::setNickName_C_TO_S: {
                         memset(tmp, 0, sizeof(tmp));
                         cli->GetRecvBuffer()->Read(

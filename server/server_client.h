@@ -24,6 +24,7 @@ class ServerClient {
 
     void SetNickname(std::string name);
     std::string GetNickname();
+    int GetPlayerID() { return playerID; }
 
    private:
     int m_nSockFd{-1};
@@ -31,4 +32,6 @@ class ServerClient {
     CircleBuffer<char>* m_sendBuffer{nullptr};
     CircleBuffer<char>* m_recvBuffer{nullptr};
     std::string nickname;
+    int playerID{-1};
+    static int playerIdCounter;
 };

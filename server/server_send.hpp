@@ -9,6 +9,7 @@ void Welcome(ServerClient* cli) {
     Packet* packet = new Packet(Chat::TYPE::welcome_S_TO_C);
 
     Chat::Welcome_S_TO_C msg;
+    msg.set_playerid(cli->GetPlayerID());
     char tmp[1024];
     memset(tmp, 0, sizeof(tmp));
     msg.SerializeToArray(tmp, msg.ByteSizeLong());

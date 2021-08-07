@@ -3,12 +3,13 @@
 #include <unistd.h>
 #include <cstring>
 #include <iostream>
-
+int ServerClient::playerIdCounter = 0;
 ServerClient::ServerClient(int fd, sockaddr* addr) {
     m_nSockFd = fd;
     m_sAddr = *addr;
     m_sendBuffer = new CircleBuffer<char>(1024);
     m_recvBuffer = new CircleBuffer<char>(1024);
+    playerID = ++playerIdCounter;
 }
 
 ServerClient::~ServerClient() {

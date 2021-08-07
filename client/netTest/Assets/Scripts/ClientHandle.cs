@@ -8,11 +8,11 @@ public class ClientHandle : MonoBehaviour
 {
     public static void Welcome(Packet _packet) {
         Debug.Log($"Receive welcome msg from server ");
-        //Chat.Welcome_S_TO_C msg = Chat.Welcome_S_TO_C.Parser.ParseFrom(_packet.ReadBytes(_packet.UnreadLength()));
-       
+        Chat.Welcome_S_TO_C msg = Chat.Welcome_S_TO_C.Parser.ParseFrom(_packet.ReadBytes(_packet.UnreadLength()));
+        Debug.Log("playerid: "+msg.PlayerID);
 
         
-        //Client.instance.myId = _myId;
+        Client.instance.myId = msg.PlayerID;
         //send welcome received packet
         ClientSend.SetNickname("www");
     }
