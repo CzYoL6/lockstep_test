@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-public enum ServerPackets {
+/*public enum ServerPackets {
     welcome = 1,
     SpawnPlayer,
     DealCardKnown,
@@ -28,7 +28,7 @@ public enum ClientPackets {
     IWin,
     Skipped,
     ReportSuccess
-}
+}*/
 public class Packet : IDisposable {
     private List<byte> buffer;
     private byte[] readableBuffer;
@@ -289,6 +289,7 @@ public class Packet : IDisposable {
             throw new Exception("Could not read value of type 'string'!");
         }
     }
+
     #endregion
     private bool disposed = false;
 

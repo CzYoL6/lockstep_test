@@ -19,7 +19,7 @@ public class Client : MonoBehaviour
     private bool isConnected = false;
 
     private delegate void PacketHandler(Packet _packet);
-    private static Dictionary<int, PacketHandler> packetHandlers;
+    private static Dictionary<Chat.TYPE, PacketHandler> packetHandlers;
 
     public class TCP {
 
@@ -74,9 +74,13 @@ public class Client : MonoBehaviour
         }
 
         private void ReceiveCallback(IAsyncResult _result) {
+            Debug.Log("received some thing");
             ThreadManager.ExecuteOnMainThread(() => {
                 try {
                     int _byteLength = stream.EndRead(_result);
+
+                    Debug.Log(_byteLength);
+
                     if (_byteLength <= 0) {
                         //disconnect,server is closed
                         Debug.Log("server closed.");
@@ -115,8 +119,10 @@ public class Client : MonoBehaviour
             while (_packetLength > 0 && _packetLength <= receivedData.UnreadLength()) {
                 byte[] _packetBytes = receivedData.ReadBytes(_packetLength);
                 using (Packet _packet = new Packet(_packetBytes)) {
-                    int _packetId = _packet.ReadInt();
-                    packetHandlers[_packetId](_packet);
+
+                    Chat.TYPE _packetId = (Chat.TYPE)_packet.ReadInt();
+                    Debug.Log("type: " + _packetId);
+                    packetHandlers[_packetId](_packet); 
                 }
 
                 _packetLength = 0;
@@ -149,11 +155,20 @@ public class Client : MonoBehaviour
 
     }
     private void InitializeClientData() {
+
+        packetHandlers = new Dictionary<Chat.TYPE, PacketHandler>() {
+                {Chat.TYPE.WelcomeSToC, ClientHandle.Welcome },
+            {Chat.TYPE.NickNameBeenSetSToC, ClientHandle.NicknameSet }
+
+            };
+        Debug.Log("Initializing Data..");
     }
 
 
     private void Awake() {
-        if(instance == null) {
+        tcp = new TCP();
+        DontDestroyOnLoad(gameObject);
+        if (instance == null) {
             instance = this;
         }
         else if(instance != this) {
@@ -173,8 +188,7 @@ public class Client : MonoBehaviour
 
     // Start is called before the first frame update
     void Start(){
-        tcp = new TCP();
-        DontDestroyOnLoad(gameObject);
+        
     }
 
     public void ConnectToServer(string IP, int PORT) {

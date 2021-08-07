@@ -1,8 +1,8 @@
 #include "server.h"
 
-int main() {
+int main(int argc, char** argv) {
     Server server;
-    server.Start("172.29.249.214", 2333);
+    server.Start(argv[1], 2333);
     while (server.IsRunning()) {
         server.Update();
         server.HandleData();
