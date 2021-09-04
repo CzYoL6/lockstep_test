@@ -1,0 +1,1 @@
+g++ server.cpp server_main.cpp server_client.cpp message.pb.cc circle_buffer.hpp ikcp.c kcpserver.cpp kcpsession.cpp packet.cpp player.cpp game.cpp server_handle.cpp server_send.cpp -lprotobuf -o server -g

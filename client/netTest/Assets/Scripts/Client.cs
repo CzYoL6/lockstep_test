@@ -9,7 +9,7 @@ public class Client : MonoBehaviour
 {
     public static Client instance;
 
-    public static int dataBufferSize = 4096 * 2;
+    public static int dataBufferSize = 1024*20;
     public string ip;
     public int port;
     public int myId = 0;
@@ -79,7 +79,7 @@ public class Client : MonoBehaviour
                 try {
                     int _byteLength = stream.EndRead(_result);
 
-                    Debug.Log(_byteLength);
+                    Debug.Log("received length: " + _byteLength);
 
                     if (_byteLength <= 0) {
                         //disconnect,server is closed
@@ -158,7 +158,9 @@ public class Client : MonoBehaviour
 
         packetHandlers = new Dictionary<Chat.TYPE, PacketHandler>() {
                 {Chat.TYPE.WelcomeSToC, ClientHandle.Welcome },
-            {Chat.TYPE.NickNameBeenSetSToC, ClientHandle.NicknameSet }
+            {Chat.TYPE.UpdateRoomInfoSToC, ClientHandle.UpdateRoomInfo },
+            {Chat.TYPE.NotifyStartGameSToC, ClientHandle.NotifyStartGame },
+            {Chat.TYPE.UpdateInfoSToC, ClientHandle.UpdateInfo }
 
             };
         Debug.Log("Initializing Data..");

@@ -28,6 +28,23 @@ public class ClientSend : MonoBehaviour
         }
     }
 
+    public static void SendControlInfo(bool W, bool A, bool S, bool D) {
+
+        //Debug.Log("sending control info");
+        using (Packet _packet = new Packet((int)Chat.TYPE.ControlInfoCToS)) {
+            Chat.ControlInfo_C_TO_S msg = new Chat.ControlInfo_C_TO_S {
+                W = W,
+                A = A,
+                S = S,
+                D = D,
+                PlayerID = Client.instance.myId
+            };
+            _packet.Write(msg.ToByteArray());
+
+            SendTCPData(_packet);
+        }
+    }
+
 
     #endregion
 

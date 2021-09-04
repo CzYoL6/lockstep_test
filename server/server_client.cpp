@@ -1,14 +1,14 @@
 #include "server_client.h"
-#include <sys/socket.h>
-#include <unistd.h>
 #include <cstring>
 #include <iostream>
+#include <sys/socket.h>
+#include <unistd.h>
 int ServerClient::playerIdCounter = 0;
-ServerClient::ServerClient(int fd, sockaddr* addr) {
+ServerClient::ServerClient(int fd, sockaddr *addr) {
     m_nSockFd = fd;
     m_sAddr = *addr;
-    m_sendBuffer = new CircleBuffer<char>(1024);
-    m_recvBuffer = new CircleBuffer<char>(1024);
+    m_sendBuffer = new CircleBuffer<char>(1024 * 10);
+    m_recvBuffer = new CircleBuffer<char>(1024 * 10);
     playerID = ++playerIdCounter;
 }
 
@@ -31,23 +31,23 @@ bool ServerClient::HasRecvData() const {
     return !m_recvBuffer->isEmpty();
 }
 
-int ServerClient::ReadFromSendBuffer(char* buf,
+int ServerClient::ReadFromSendBuffer(char *buf,
                                      int size,
                                      bool peek = false) const {
     return m_sendBuffer->Read(buf, size, peek);
 }
 
-int ServerClient::ReadFromRecvBuffer(char* buf,
+int ServerClient::ReadFromRecvBuffer(char *buf,
                                      int size,
                                      bool peek = false) const {
     return m_recvBuffer->Read(buf, size, peek);
 }
 
-int ServerClient::WriteIntoSendBuffer(char* buf, int size) const {
+int ServerClient::WriteIntoSendBuffer(char *buf, int size) const {
     return m_sendBuffer->Write(buf, size);
 }
 
-int ServerClient::WriteIntoRecvBuffer(char* buf, int size) const {
+int ServerClient::WriteIntoRecvBuffer(char *buf, int size) const {
     return m_recvBuffer->Write(buf, size);
 }
 
